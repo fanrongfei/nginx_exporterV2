@@ -1,0 +1,81 @@
+#相关基础配置
+[common]
+#配置中心服务地址
+regiServer="127.0.0.1:50002"
+#是否开启配置中心；true;开启配置中心；false 关闭配置中心
+enableRegister=false
+#省/市 平台（拉取配置使用）,true 省级平台；false 市平台
+platform=false
+#目标机器 nginx access日志路径（最好是绝对路径）
+accessPath="./access.log"
+
+
+#告警规则
+[alarm]
+#获取日志间隔时间（单位分钟）
+fragmentSize=5
+#发送窗口阈值，当下一次出发的报警，和上次一样，就延迟播报直至积累到阈值次数
+delayTimes=50
+
+#状态码过滤规则
+[ruleStatus]
+#状态码报警阈值(单位个)
+threshold=30
+#配置接口白名单,[!!!注意 使用单引号隔开]；请填入url:端口 正则表达式
+whiteListStatus=['^\/icdss-knowledge\/js\/.*\.js\:2[\d]{2}$',]
+#黑名单，填入具体接口
+blacklistStatus=[]
+
+
+#接口响应时间过滤规则
+[ruleResponse]
+#响应时间报警阈值（单位ms）
+responseTime=10000000
+#配置接口白名单,[!!!注意 使用单引号隔开]；请填入url:端口 正则表达式
+whiteListResponse=['\/.*(\/)?\:1\d{2}$','\/.*(\/)?\:3\d{2}$','\/.*(\/)?\:4\d{2}$','\/.*(\/)?\:5\d{2}$']
+#黑名单，填入具体接口
+blacklistResponse=['diagnose\/odiagnose\/diffByContext']
+
+
+
+
+#告警企业微信设置--主要是周期内4xx|5xx错误信息告警
+[wechat1]
+wechatserver="https://qyapi.weixin.qq.com"
+#企业微信的Corpid
+corpid1="ww4480342fad4cd50"
+#企业微信的Secret
+secret1="WZghVB1BFFMaCR0WgDtwF2qaNOKXlCPshU2sey00o0"
+#企业微信的Agentid 例如 每个地市
+agentid1=1000025
+#配置k8s集群名称"
+name="xx测试集群"
+#配置ngxin的ip
+nginxIp=""
+
+
+#告警企业微信性能告警--0点统计5xx>200|0点200接口响应时间>阈值|每个周期接口响应时间>阈值的
+[wechat2]
+#企业微信的Corpid
+corpid2="ww4480342afad4cd50x"
+#企业微信的Secret
+secret2="cBzeUW7Nz4X1Y"
+#企业微信的Agentid 例如 每个地市
+agentid2=100026
+
+#2020/12/01/16点15分,新增接口接口 错误码累计报警
+[wechat3]
+threshold3=5
+corpid3="ww4480342afad4cd50"
+secret3="cBzeUW7Nz4X9bdOhTXDufMHhiA95DjuOWOLgHA8po1Y"
+agentid3=100026
+
+
+
+
+#gateway push数据配置
+[gateway]
+#是否开启上报，true:上报；false:不上报
+enable=false
+#pushgateway 地址
+serverURL="http://172.31.129.186:30565/metrics/job/nginx/instance/nginx"
