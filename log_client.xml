@@ -1,0 +1,13 @@
+<seelog>
+    <outputs formatid="main">        
+        <filter levels="critical,error,warn,info,debug">
+            <buffered size="10000" flushperiod="1000">
+			    <rollingfile type="size" filename="log/nginx_exporter.log" maxsize="100000000" maxrolls="30"/>
+            </buffered>
+        </filter>
+    </outputs>
+
+    <formats>
+        <format id="main" format="%Date/%Time [%LEV] %Func:%Line %Msg%n"/>
+    </formats>
+</seelog>
